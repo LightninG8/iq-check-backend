@@ -4,5 +4,5 @@ export const TYPES = {
   IResultController: Symbol.for('IResultController'),
   IExceptionFilter: Symbol.for('IExceptionFilter'),
   IConfigService: Symbol.for('IConfigService'),
-  IDatabaseService: Symbol.for('IDatabaseService')
+  IDatabaseService: Symbol.for('IDatabaseService'),
 }
