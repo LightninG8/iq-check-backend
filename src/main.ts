@@ -1,7 +1,7 @@
-import { LoggerService } from "./logger";
+import { LoggerService } from "./services";
 import { App } from "./app";
 import { ResultController } from './controllers';
-import { ExceptionFilter } from "./errors";
+import { ExceptionFilter } from "./exceptions";
 import { Container, ContainerModule, interfaces  } from 'inversify';
 import { TYPES } from "./types";
 import { IExceptionFilter, ILogger } from "./interfaces";

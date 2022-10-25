@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { IBaseController } from '../common';
+import { IBaseController } from './base.controller.interface';
 
 export interface IResultController extends IBaseController {
   getResult: (req: Request, res: Response, next: NextFunction) => void;

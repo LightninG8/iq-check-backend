@@ -4,7 +4,6 @@ import { injectable, inject } from 'inversify';
 import { TYPES } from './types';
 import { IExceptionFilter, ILogger, IResultController } from './interfaces';
 import 'reflect-metadata';
-import { IBaseController } from 'common';
 
 @injectable()
 export class App {

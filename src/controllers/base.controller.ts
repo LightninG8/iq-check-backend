@@ -3,9 +3,6 @@ import { IControllerRoute, ILogger } from "interfaces";
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 
-export interface IBaseController {
-  router: Router;
-}
 @injectable()
 export abstract class BaseController {
   private readonly _router: Router;

@@ -1,7 +1,7 @@
-import { BaseController } from "../common";
+import { BaseController } from "./base.controller";
 import { NextFunction, Request, Response } from "express";
-import { LoggerService } from "logger";
-import { HTTPError } from "../errors";
+import { LoggerService } from "../services";
+import { HTTPError } from "../exceptions";
 import { injectable, inject } from 'inversify';
 import { TYPES } from "../types";
 import { ILogger } from "../interfaces";
