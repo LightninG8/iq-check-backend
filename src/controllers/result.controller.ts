@@ -8,6 +8,8 @@ import { ILogger } from "../interfaces";
 import 'reflect-metadata';
 import { IResultController } from "../interfaces";
 import { ResultModel } from '../models';
+import { ValidateMiddleware } from "../middlewares";
+import { ResultSetDto, ResultGetDto } from "../dto";
 
 @injectable()
 export class ResultController extends BaseController implements IResultController{
@@ -17,8 +19,18 @@ export class ResultController extends BaseController implements IResultControlle
     super(loggerService);
 
     this.bindRoutes([
-      { path: '/', method: 'post', func: this.setResult },
-      { path: '/', method: 'get', func: this.getResult }
+      {
+        path: '/',
+        method: 'post',
+        func: this.setResult,
+        middlewares: [new ValidateMiddleware(ResultSetDto)]
+      },
+      {
+        path: '/',
+        method: 'get',
+        func: this.getResult,
+        middlewares: [new ValidateMiddleware(ResultGetDto)]
+      }
     ])
   }
   async getResult(req: Request, res: Response, next: NextFunction) {
@@ -47,7 +59,7 @@ export class ResultController extends BaseController implements IResultControlle
     try {
       const result = new ResultModel(req.body);
 
-      await result.save()
+      await result.save();
 
       this.ok(res, {
         message: 'Результат зарегистрирован',

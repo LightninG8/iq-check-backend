@@ -13,6 +13,18 @@ const ResultSchema = new Schema({
   iq: {
     type: Number,
     required: true
+  },
+  yearOfBirth: {
+    type: Number,
+    required: true
+  },
+  educationType: {
+    type: String,
+    required: true
+  },
+  educationLevel: {
+    type: String,
+    required: true
   }
 }, { timestamps: true });
 

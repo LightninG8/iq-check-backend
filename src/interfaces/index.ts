@@ -6,3 +6,5 @@ export * from './base.controller.interface';
 export * from './config.service.interface';
 export * from './database.service.interface';
 export * from './Result.model.interface';
+export * from './validate.middleware.interface';
+export * from './middleware.interface';
