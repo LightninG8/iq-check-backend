@@ -6,7 +6,7 @@ import { ILogger, IResultService } from "../interfaces";
 import 'reflect-metadata';
 import { IResultController } from "../interfaces";
 import { ValidateMiddleware } from "../middlewares";
-import { ResultSetDto, ResultGetDto } from "../dto";
+import { ResultSetDto, ResultGetByIdDto } from "../dto";
 
 @injectable()
 export class ResultController extends BaseController implements IResultController{
@@ -27,13 +27,13 @@ export class ResultController extends BaseController implements IResultControlle
         path: '/',
         method: 'get',
         func: this.getResult,
-        middlewares: [new ValidateMiddleware(ResultGetDto)]
+        middlewares: [new ValidateMiddleware(ResultGetByIdDto)]
       }
     ])
   }
   async getResult(req: Request, res: Response, next: NextFunction) {
     try { 
-      const result = await this.resultService.get(req.body);
+      const result = await this.resultService.getById(req.body);
       
       if (!result) {
         return this.send(res, 401, {
@@ -63,7 +63,7 @@ export class ResultController extends BaseController implements IResultControlle
   
       this.ok(res, {
         message: 'Результат зарегистрирован',
-        result
+        payload: result
       });
     } catch(e) {
       return this.send(res, 500, {

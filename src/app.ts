@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import { Server } from 'http';
 import { injectable, inject } from 'inversify';
 import { TYPES } from './types';
-import { IConfigService, IDatabaseService, IExceptionFilter, ILogger, IResultController } from './interfaces';
+import { IConfigService, IDatabaseService, IExceptionFilter, ILogger, IRecentController, IResultController } from './interfaces';
 import 'reflect-metadata';
 import mongoose from 'mongoose';
 import { json } from 'body-parser';
@@ -17,6 +17,7 @@ export class App {
   constructor (
     @inject(TYPES.ILogger) private logger: ILogger,
     @inject(TYPES.IResultController) private resultController: IResultController,
+    @inject(TYPES.IRecentController) private recentController: IRecentController,
     @inject(TYPES.IExceptionFilter) private exceptionFilter: IExceptionFilter,
     @inject(TYPES.IDatabaseService) private databaseService: IDatabaseService,
 
@@ -26,6 +27,8 @@ export class App {
   };
   useRoutes() {
     this.app.use('/result', this.resultController.router);
+    this.app.use('/recent', this.recentController.router);
+
   };
 
   useExceptionFilters() {

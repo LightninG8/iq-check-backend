@@ -1,6 +1,6 @@
 import { IResultService } from '../interfaces';
 import { injectable } from 'inversify';
-import { ResultGetDto, ResultSetDto } from '../dto';
+import { ResultGetByIdDto, ResultGetByEmailDto, ResultGetRecentDto, ResultSetDto } from '../dto';
 import { ResultModel } from '../models';
 
 @injectable()
@@ -19,7 +19,7 @@ export class ResultService implements IResultService {
     
   }
 
-  async get(body: ResultGetDto) {
+  async getById(body: ResultGetByIdDto) {
     try {
       const result = await ResultModel.findOne(body);
 
@@ -27,6 +27,25 @@ export class ResultService implements IResultService {
     } catch (e) { 
       return null;
     }
-    
+  }
+
+  async getByEmail(body: ResultGetByEmailDto) {
+    try {
+      const result = await ResultModel.findOne(body);
+
+      return result;
+    } catch (e) { 
+      return null;
+    }
+  }
+
+  async getRecent(body: ResultGetRecentDto) {
+    try {
+      const recentResults = await ResultModel.find().sort({_id: -1}).limit(+body.limit);
+
+      return recentResults;
+    } catch (e) { 
+      return null;
+    }
   }
 }
