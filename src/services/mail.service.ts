@@ -38,7 +38,7 @@ export class MailService implements IMailService {
       from: `"интеллект-тест.рф" ${this.configService.get('MAIL_LOGIN')}`,
       to: email,
       subject: 'Тест на IQ | Интеллект тест',
-      text: 'Для получения информации о Вашем результате прохождения Iq-теста перейдите по ссылке',
+      text: 'Для получения информации о Вашем результате прохождения IQ-теста перейдите по ссылке',
       html: `
         <table border="0" cellspacing="0" cellpadding="0" style="max-width:600px">
             <tbody>
@@ -50,7 +50,7 @@ export class MailService implements IMailService {
                         <tr>
                             <td width="32"></td>
                             <td style="font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:24px;color:#ffffff;line-height:1.25">
-                                IQ-test
+                                IQ тест
                             </td>
                             <td width="32"></td>
                         </tr>
