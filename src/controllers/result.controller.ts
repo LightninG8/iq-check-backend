@@ -2,7 +2,7 @@ import { BaseController } from "./base.controller";
 import { NextFunction, Request, Response } from "express";
 import { injectable, inject } from 'inversify';
 import { TYPES } from "../types";
-import { ILogger, IResultService } from "../interfaces";
+import { ILogger, IMailService, IResultService } from "../interfaces";
 import 'reflect-metadata';
 import { IResultController } from "../interfaces";
 import { ValidateMiddleware } from "../middlewares";
@@ -13,6 +13,7 @@ export class ResultController extends BaseController implements IResultControlle
   constructor(
     @inject(TYPES.ILogger) private loggerService: ILogger,
     @inject(TYPES.IResultService) private resultService: IResultService,
+    @inject(TYPES.IMailService) private mailService: IMailService,
   ) {
     super(loggerService);
 
@@ -60,6 +61,8 @@ export class ResultController extends BaseController implements IResultControlle
           message: `Ошибка запроса. Проверьте корректность введённых данных`
         })
       }
+
+      await this.mailService.send(req.body.email, result._id!.toString());
   
       this.ok(res, {
         message: 'Результат зарегистрирован',

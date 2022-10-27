@@ -7,6 +7,6 @@ export const TYPES = {
   IDatabaseService: Symbol.for('IDatabaseService'),
   IResultService: Symbol.for('IResultService'),
   IRecentController: Symbol.for('IRecentController'),
-  ITopController: Symbol.for('ITopController')
-
+  ITopController: Symbol.for('ITopController'),
+  IMailService: Symbol.for('IMailService')
 }
