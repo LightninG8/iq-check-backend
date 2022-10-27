@@ -18,13 +18,13 @@ export class ResultController extends BaseController implements IResultControlle
 
     this.bindRoutes([
       {
-        path: '/',
+        path: '/result',
         method: 'post',
         func: this.setResult,
         middlewares: [new ValidateMiddleware(ResultSetDto)]
       },
       {
-        path: '/',
+        path: '/result',
         method: 'get',
         func: this.getResult,
         middlewares: [new ValidateMiddleware(ResultGetByIdDto)]

@@ -18,7 +18,7 @@ export class TopController extends BaseController implements ITopController{
 
     this.bindRoutes([
       {
-        path: '/',
+        path: '/top',
         method: 'get',
         func: this.getTop,
         middlewares: [new ValidateMiddleware(ResultGetTopDto)]

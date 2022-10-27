@@ -28,9 +28,9 @@ export class App {
     this.port = 8080;
   };
   useRoutes() {
-    this.app.use('/result', this.resultController.router);
-    this.app.use('/recent', this.recentController.router);
-    this.app.use('/top', this.topController.router);
+    this.app.use('/api', this.resultController.router);
+    this.app.use('/api', this.recentController.router);
+    this.app.use('/api', this.topController.router);
   };
 
   useExceptionFilters() {

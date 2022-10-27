@@ -18,7 +18,7 @@ export class RecentController extends BaseController implements IRecentControlle
 
     this.bindRoutes([
       {
-        path: '/',
+        path: '/recent',
         method: 'get',
         func: this.getRecent,
         middlewares: [new ValidateMiddleware(ResultGetRecentDto)]
