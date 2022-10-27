@@ -1,10 +1,10 @@
 import { ConfigService, DatabaseService, LoggerService, ResultService } from "./services";
 import { App } from "./app";
-import { RecentController, ResultController } from './controllers';
+import { RecentController, ResultController, TopController } from './controllers';
 import { ExceptionFilter } from "./exceptions";
 import { Container, ContainerModule, interfaces  } from 'inversify';
 import { TYPES } from "./types";
-import { IConfigService, IDatabaseService, IExceptionFilter, ILogger, IRecentController, IResultController, IResultService } from "./interfaces";
+import { IConfigService, IDatabaseService, IExceptionFilter, ILogger, IRecentController, IResultController, IResultService, ITopController } from "./interfaces";
 
 export interface IBootstrapReturn {
   appContainer: Container;
@@ -17,6 +17,7 @@ export const appBindings = new ContainerModule((bind: interfaces.Bind) => {
 
   bind<IResultController>(TYPES.IResultController).to(ResultController).inSingletonScope();
   bind<IRecentController>(TYPES.IRecentController).to(RecentController).inSingletonScope();
+  bind<ITopController>(TYPES.ITopController).to(TopController).inSingletonScope();
 
   bind<IConfigService>(TYPES.IConfigService).to(ConfigService).inSingletonScope();
   bind<IDatabaseService>(TYPES.IDatabaseService).to(DatabaseService).inSingletonScope();

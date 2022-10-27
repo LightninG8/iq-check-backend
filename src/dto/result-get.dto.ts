@@ -7,7 +7,7 @@ export class ResultGetByIdDto {
 
 export class ResultGetRecentDto {
   @IsInt({ message: 'Неверно указан лимит'})
-  limit: string;
+  limit: number;
 }
 
 
@@ -15,3 +15,12 @@ export class ResultGetByEmailDto {
   @IsEmail({}, { message: 'Неверно указан email'})
   email: string;
 }
+
+export class ResultGetTopDto {
+  @IsInt({ message: 'Неверно указан период'})
+  days: number;
+
+  @IsInt({ message: 'Неверно указан лимит'})
+  limit: number;
+}
+
