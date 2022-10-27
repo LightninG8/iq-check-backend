@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import { Server } from 'http';
 import { injectable, inject } from 'inversify';
 import { TYPES } from './types';
-import { IConfigService, IDatabaseService, IExceptionFilter, ILogger, IMailService, IRecentController, IResultController, ITopController } from './interfaces';
+import { IConfigService, IDatabaseService, IExceptionFilter, ILogger, IMailService, IRecentController, IRestoreController, IResultController, ITopController } from './interfaces';
 import 'reflect-metadata';
 import { json } from 'body-parser';
 import cors from 'cors';
@@ -15,9 +15,12 @@ export class App {
 
   constructor (
     @inject(TYPES.ILogger) private logger: ILogger,
+
     @inject(TYPES.IResultController) private resultController: IResultController,
     @inject(TYPES.IRecentController) private recentController: IRecentController,
     @inject(TYPES.ITopController) private topController: ITopController,
+    @inject(TYPES.IRestoreController) private restoreController: IRestoreController,
+
 
     @inject(TYPES.IExceptionFilter) private exceptionFilter: IExceptionFilter,
     @inject(TYPES.IDatabaseService) private databaseService: IDatabaseService,
@@ -32,6 +35,8 @@ export class App {
     this.app.use('/api', this.resultController.router);
     this.app.use('/api', this.recentController.router);
     this.app.use('/api', this.topController.router);
+    this.app.use('/api', this.restoreController.router);
+
   };
 
   useExceptionFilters() {

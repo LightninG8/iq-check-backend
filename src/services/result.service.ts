@@ -31,7 +31,7 @@ export class ResultService implements IResultService {
 
   async getByEmail(body: ResultGetByEmailDto) {
     try {
-      const result = await ResultModel.findOne(body);
+      const result = (await ResultModel.find(body).sort({_id: -1}).limit(1))[0];
 
       return result;
     } catch (e) { 

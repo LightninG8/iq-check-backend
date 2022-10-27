@@ -19,3 +19,8 @@ export class ResultSetDto {
   @IsString({ message: 'Не указано образование'})
   educationType: string;
 }
+
+export class ResultRestoreDto {
+  @IsEmail({}, { message: 'Неверно указан email'})
+  email: string;
+}
