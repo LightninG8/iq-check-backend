@@ -19,7 +19,7 @@ export class ResultService implements IResultService {
     
   }
 
-  async getById(body: ResultGetByIdDto) {
+  async getResultById(body: ResultGetByIdDto) {
     try {
       const result = await ResultModel.findOne(body);
 
@@ -29,7 +29,7 @@ export class ResultService implements IResultService {
     }
   }
 
-  async getByEmail(body: ResultGetByEmailDto) {
+  async getResultByEmail(body: ResultGetByEmailDto) {
     try {
       const result = (await ResultModel.find(body).sort({_id: -1}).limit(1))[0];
 

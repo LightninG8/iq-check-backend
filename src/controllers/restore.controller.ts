@@ -28,7 +28,7 @@ export class RestoreController extends BaseController implements IRestoreControl
   }
   async restoreResult(req: Request, res: Response, next: NextFunction) {
     try { 
-      const result = await this.resultService.getByEmail(req.body);
+      const result = await this.resultService.getResultByEmail(req.body);
       
       if (!result) {
         return this.send(res, 401, {
