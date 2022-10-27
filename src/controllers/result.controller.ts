@@ -1,13 +1,10 @@
 import { BaseController } from "./base.controller";
 import { NextFunction, Request, Response } from "express";
-import { LoggerService } from "../services";
-import { HTTPError } from "../exceptions";
 import { injectable, inject } from 'inversify';
 import { TYPES } from "../types";
-import { ILogger } from "../interfaces";
+import { ILogger, IResultService } from "../interfaces";
 import 'reflect-metadata';
 import { IResultController } from "../interfaces";
-import { ResultModel } from '../models';
 import { ValidateMiddleware } from "../middlewares";
 import { ResultSetDto, ResultGetDto } from "../dto";
 
@@ -15,6 +12,7 @@ import { ResultSetDto, ResultGetDto } from "../dto";
 export class ResultController extends BaseController implements IResultController{
   constructor(
     @inject(TYPES.ILogger) private loggerService: ILogger,
+    @inject(TYPES.IResultService) private resultService: IResultService,
   ) {
     super(loggerService);
 
@@ -34,14 +32,12 @@ export class ResultController extends BaseController implements IResultControlle
     ])
   }
   async getResult(req: Request, res: Response, next: NextFunction) {
-    try {
-      const result = (await ResultModel.find({email: req.query.email}).sort({updatedAt: -1}).limit(1))[0]
-
+    try { 
+      const result = await this.resultService.get(req.body);
+      
       if (!result) {
-        next(new HTTPError(401, `Результат ${req.query.email} не зарегистрирован`, 'result'));
-
         return this.send(res, 401, {
-          message: `Результат ${req.route.email} не зарегистрирован`
+          message: `Результат ${req.body._id} не зарегистрирован`
         })
       }
 
@@ -57,10 +53,14 @@ export class ResultController extends BaseController implements IResultControlle
   }
   async setResult(req: Request, res: Response, next: NextFunction) {
     try {
-      const result = new ResultModel(req.body);
+      const result = await this.resultService.set(req.body);
 
-      await result.save();
-
+      if (!result) {
+        return this.send(res, 401, {
+          message: `Ошибка запроса. Проверьте корректность введённых данных`
+        })
+      }
+  
       this.ok(res, {
         message: 'Результат зарегистрирован',
         result

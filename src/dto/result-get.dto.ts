@@ -1,6 +1,6 @@
-import { IsEmail } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class ResultGetDto {
-  @IsEmail({}, { message: 'Неверно указан email'})
-  email: string;
+  @IsString({ message: 'Неверно указан id'})
+  _id: string;
 }
