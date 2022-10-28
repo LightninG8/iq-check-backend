@@ -29,7 +29,7 @@ export class App {
 
   ) {
     this.app = express();
-    this.port = 80;
+    this.port = 8080;
   };
   useRoutes() {
     this.app.use('/api', this.resultController.router);
