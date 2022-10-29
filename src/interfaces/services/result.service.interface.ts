@@ -1,12 +1,13 @@
 import { ResultGetByIdDto, ResultGetByEmailDto, ResultGetRecentDto, ResultSetDto, ResultGetTopDto } from "dto";
 import { IResult } from "interfaces/models";
 import { Document } from "mongoose";
+import { Query } from 'express-serve-static-core';
 
 export interface IResultService {
-  set: (body: ResultSetDto) => Promise<Document<unknown, any, IResult> | null>;
-  getResultById: (body: ResultGetByIdDto) => Promise<Document<unknown, any, IResult> | null>;
-  getResultByEmail: (body: ResultGetByEmailDto) => Promise<Document<unknown, any, IResult> | null>;
-  getRecent: (body: ResultGetRecentDto) => Promise<Document<unknown, any, IResult>[] | null>;
-  getTop: (body: ResultGetTopDto) => Promise<Document<unknown, any, IResult>[] | null>;
+  set: (body: Query) => Promise<Document<unknown, any, IResult> | null>;
+  getResultById: (query: Query) => Promise<Document<unknown, any, IResult> | null>;
+  getResultByEmail: (query: Query) => Promise<Document<unknown, any, IResult> | null>;
+  getRecent: (query: Query) => Promise<Document<unknown, any, IResult>[] | null>;
+  getTop: (query: Query) => Promise<Document<unknown, any, IResult>[] | null>;
 
 }

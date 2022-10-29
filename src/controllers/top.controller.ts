@@ -27,11 +27,11 @@ export class TopController extends BaseController implements ITopController{
   }
   async getTop(req: Request, res: Response, next: NextFunction) {
     try { 
-      const topOfPeriodResults = await this.resultService.getTop(req.body);
+      const topOfPeriodResults = await this.resultService.getTop(req.query);
       
       if (!topOfPeriodResults?.length) {
         return this.send(res, 401, {
-          message: `Топ результатов за ${req.body.period} дней не найдены`
+          message: `Топ результатов за ${req.query.period} дней не найдены`
         })
       }
 

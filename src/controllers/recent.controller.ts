@@ -27,11 +27,11 @@ export class RecentController extends BaseController implements IRecentControlle
   }
   async getRecent(req: Request, res: Response, next: NextFunction) {
     try { 
-      const recentResults = await this.resultService.getRecent(req.body);
+      const recentResults = await this.resultService.getRecent(req.query);
       
       if (!recentResults?.length) {
         return this.send(res, 401, {
-          message: `Последние ${req.body.limit} не найдены`
+          message: `Последние ${req.query.limit} не найдены`
         })
       }
 

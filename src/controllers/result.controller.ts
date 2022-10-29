@@ -33,12 +33,12 @@ export class ResultController extends BaseController implements IResultControlle
     ])
   }
   async getResult(req: Request, res: Response, next: NextFunction) {
-    try { 
-      const result = await this.resultService.getResultById(req.body);
+    try {  
+      const result = await this.resultService.getResultById(req.query);
       
       if (!result) {
         return this.send(res, 401, {
-          message: `Результат ${req.body._id} не зарегистрирован`
+          message: `Результат ${req.query._id} не зарегистрирован`
         })
       }
 
