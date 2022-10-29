@@ -12,8 +12,6 @@ export class ValidateMiddleware implements IValidateMiddleware {
   }
 
   execute(req: Request, res: Response, next: NextFunction): void {
-    console.log(req.query);
-
     const data = req.method === 'GET' ? req.query : req.body;
   
     const instance = plainToClass(this.classToValidate, data);
