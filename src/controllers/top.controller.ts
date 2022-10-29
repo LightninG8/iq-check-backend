@@ -27,7 +27,7 @@ export class TopController extends BaseController implements ITopController{
   }
   async getTop(req: Request, res: Response, next: NextFunction) {
     try { 
-      const topOfPeriodResults = await this.resultService.getTop(req.query);
+      const topOfPeriodResults = await this.resultService.getTop(req.query as unknown as ResultGetTopDto);
       
       if (!topOfPeriodResults?.length) {
         return this.send(res, 401, {

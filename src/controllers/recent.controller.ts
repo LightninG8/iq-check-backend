@@ -27,7 +27,7 @@ export class RecentController extends BaseController implements IRecentControlle
   }
   async getRecent(req: Request, res: Response, next: NextFunction) {
     try { 
-      const recentResults = await this.resultService.getRecent(req.query);
+      const recentResults = await this.resultService.getRecent(req.query as unknown as ResultGetRecentDto);
       
       if (!recentResults?.length) {
         return this.send(res, 401, {

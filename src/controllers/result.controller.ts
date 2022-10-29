@@ -34,7 +34,7 @@ export class ResultController extends BaseController implements IResultControlle
   }
   async getResult(req: Request, res: Response, next: NextFunction) {
     try {  
-      const result = await this.resultService.getResultById(req.query);
+      const result = await this.resultService.getResultById(req.query as unknown as ResultGetByIdDto);
       
       if (!result) {
         return this.send(res, 401, {

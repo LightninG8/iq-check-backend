@@ -4,4 +4,3 @@ export * from './filters';
 export * from './middlewares';
 export * from './services';
 export * from './models';
-export * from './express';
