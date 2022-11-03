@@ -37,7 +37,7 @@ export class RecentController extends BaseController implements IRecentControlle
 
       this.ok(res, {
         message: 'Результаты найдены',
-        payload: recentResults
+        data: recentResults
       })
     } catch (e) {
       return this.send(res, 500, {

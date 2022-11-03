@@ -40,7 +40,7 @@ export class RestoreController extends BaseController implements IRestoreControl
 
       this.ok(res, {
         message: 'Результат найден',
-        payload: result
+        data: result
       })
     } catch (e) {
       return this.send(res, 500, {

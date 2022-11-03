@@ -18,6 +18,15 @@ export class ResultService implements IResultService {
     }
     
   }
+  async getResult(body: any) {
+    try {
+      const result = await ResultModel.find(body);
+
+      return result;
+    } catch (e) { 
+      return null;
+    }
+  }
 
   async getResultById(body: ResultGetByIdDto) {
     try {
@@ -41,7 +50,7 @@ export class ResultService implements IResultService {
 
   async getRecent(body: ResultGetRecentDto) {
     try {
-      const recentResults = await ResultModel.find().sort({_id: -1}).limit(body.limit);
+      const recentResults = await ResultModel.find().sort({_id: -1}).limit(+body.limit);
 
       return recentResults;
     } catch (e) { 
@@ -51,9 +60,9 @@ export class ResultService implements IResultService {
 
   async getTop(body: ResultGetTopDto) {
     try {
-      const daysAgoTimestamp = Date.now() - 1000 * 60 * 60 * 24 * body.days;
+      const daysAgoTimestamp = Date.now() - 1000 * 60 * 60 * 24 * +body.days;
 
-      const recentResults = await ResultModel.find({createdAt: {$gte: daysAgoTimestamp}}).sort({iq: -1}).limit(body.limit);
+      const recentResults = await ResultModel.find({createdAt: {$gte: daysAgoTimestamp}}).sort({iq: -1}).limit(+body.limit);
 
       return recentResults;
     } catch (e) { 

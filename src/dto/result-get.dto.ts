@@ -1,4 +1,4 @@
-import { IsString, IsInt, IsEmail } from 'class-validator';
+import { IsString, IsEmail } from 'class-validator';
 
 export class ResultGetByIdDto {
   @IsString({ message: 'Неверно указан id'})
@@ -6,8 +6,8 @@ export class ResultGetByIdDto {
 }
 
 export class ResultGetRecentDto {
-  @IsInt({ message: 'Неверно указан лимит'})
-  limit: number;
+  @IsString({ message: 'Неверно указан лимит'})
+  limit: string;
 }
 
 
@@ -17,10 +17,10 @@ export class ResultGetByEmailDto {
 }
 
 export class ResultGetTopDto {
-  @IsInt({ message: 'Неверно указан период'})
-  days: number;
+  @IsString({ message: 'Неверно указан период'})
+  days: string;
 
-  @IsInt({ message: 'Неверно указан лимит'})
-  limit: number;
+  @IsString({ message: 'Неверно указан лимит'})
+  limit: string;
 }
 

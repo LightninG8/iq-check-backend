@@ -14,15 +14,21 @@ const ResultSchema = new Schema({
     type: Number,
     required: true
   },
+  gender: {
+    type: String,
+  },
   yearOfBirth: {
-    type: Number,
-    required: true
+    type: String,
   },
   educationType: {
     type: String,
     required: true
   },
   educationLevel: {
+    type: String,
+    required: true
+  },
+  countryCode: {
     type: String,
     required: true
   }

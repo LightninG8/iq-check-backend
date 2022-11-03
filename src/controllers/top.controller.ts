@@ -37,7 +37,7 @@ export class TopController extends BaseController implements ITopController{
 
       this.ok(res, {
         message: 'Результаты найдены',
-        payload: topOfPeriodResults
+        data: topOfPeriodResults
       })
     } catch (e) {
       return this.send(res, 500, {

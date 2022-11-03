@@ -17,9 +17,9 @@ export class MailService implements IMailService {
       const testAccount = await createTestAccount();
   
       this.transporter = createTransport({
-        service: 'gmail',
         host: 'smtp.gmail.com',
-        secure: false, // true for 465, false for other ports 587
+        port: 465,
+        secure: true, // true for 465, false for other ports 587
         auth: {
           user: this.configService.get('MAIL_LOGIN'),
           pass: this.configService.get('MAIL_SECURE_KEY')

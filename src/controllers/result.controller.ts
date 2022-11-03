@@ -29,6 +29,11 @@ export class ResultController extends BaseController implements IResultControlle
         method: 'get',
         func: this.getResult,
         middlewares: [new ValidateMiddleware(ResultGetByIdDto)]
+      },
+      {
+        path: '/results',
+        method: 'get',
+        func: this.getResults
       }
     ])
   }
@@ -37,14 +42,40 @@ export class ResultController extends BaseController implements IResultControlle
       const result = await this.resultService.getResultById(req.query as unknown as ResultGetByIdDto);
       
       if (!result) {
+        this.loggerService.log(`Результат ${req.query._id} не найден`)
+
         return this.send(res, 401, {
           message: `Результат ${req.query._id} не зарегистрирован`
         })
       }
 
+      this.loggerService.log(`Результат ${req.query._id} найден`)
+
       this.ok(res, {
         message: 'Результат найден',
-        result
+        data: result
+      })
+    } catch (e) {
+      this.loggerService.error(`ошибка сервера`)
+
+      return this.send(res, 500, {
+        message: `Ошибка сервера. Повтроите запрос позднее. ${e}`
+      })
+    }
+  };
+  async getResults(req: Request, res: Response, next: NextFunction) {
+    try {  
+      const result = await this.resultService.getResult(req.query);
+      
+      if (!result) {
+        return this.send(res, 401, {
+          message: `Результаты не зарегистрирован`
+        })
+      }
+
+      this.ok(res, {
+        message: 'Результаты найдены',
+        data: result
       })
     } catch (e) {
       return this.send(res, 500, {
@@ -66,7 +97,7 @@ export class ResultController extends BaseController implements IResultControlle
   
       this.ok(res, {
         message: 'Результат зарегистрирован',
-        payload: result
+        data: result
       });
     } catch(e) {
       return this.send(res, 500, {

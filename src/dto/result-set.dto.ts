@@ -10,14 +10,17 @@ export class ResultSetDto {
   @IsInt({ message: 'Не указан IQ'})
   iq: number;
 
-  @IsInt({ message: 'Не указан год рождения'})
-  yearOfBirth: number;
+  yearOfBirth: string;
+  gender: string;
 
   @IsString({ message: 'Не указан уровень образования'})
   educationLevel: string;
 
   @IsString({ message: 'Не указано образование'})
   educationType: string;
+
+  @IsString({ message: 'Не указана страна'})
+  countryCode: string;
 }
 
 export class ResultRestoreDto {
