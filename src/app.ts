@@ -32,10 +32,10 @@ export class App {
     this.port = 8080;
   };
   useRoutes() {
-    this.app.use('/api', this.resultController.router);
-    this.app.use('/api', this.recentController.router);
-    this.app.use('/api', this.topController.router);
-    this.app.use('/api', this.restoreController.router);
+    this.app.use('/api/v1', this.resultController.router);
+    this.app.use('/api/v1', this.recentController.router);
+    this.app.use('/api/v1', this.topController.router);
+    this.app.use('/api/v1', this.restoreController.router);
 
   };
 

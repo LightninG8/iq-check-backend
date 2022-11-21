@@ -14,8 +14,6 @@ export class MailService implements IMailService {
 
   async connect() {
     try {
-      const testAccount = await createTestAccount();
-  
       this.transporter = createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -34,6 +32,8 @@ export class MailService implements IMailService {
   }
 
   async send(email: string, resultId: string) {
+    const ADDRESS = process.env.NODE_ENV == 'development' ? 'http://localhost:3000' : 'https://интеллект-тест.рф';
+  
     await this.transporter.sendMail({
       from: `"интеллект-тест.рф" ${this.configService.get('MAIL_LOGIN')}`,
       to: email,
@@ -75,7 +75,7 @@ export class MailService implements IMailService {
                                     Для получения информации о Вашем результате прохождения Iq-теста перейдите по ссылке:
                                     <br>
                                     <br>
-                                    <a style="border:1px solid #000000;padding:5px 10px;text-decoration:none" href="http://localhost:3000/certificate/${resultId}">Перейти.</a>
+                                    <a style="border:1px solid #000000;padding:5px 10px;text-decoration:none" href="${ADDRESS}/certificate/${resultId}">Перейти.</a>
                                 </p>
                             </td>
                         </tr>

@@ -28,15 +28,15 @@ export class RestoreController extends BaseController implements IRestoreControl
   }
   async restoreResult(req: Request, res: Response, next: NextFunction) {
     try { 
-      const result = await this.resultService.getResultByEmail(req.query as unknown as ResultRestoreDto);
+      const result = await this.resultService.getResultByEmail(req.body);
       
       if (!result) {
         return this.send(res, 401, {
-          message: `Результат ${req.query.email} не найден`
+          message: `Результат ${req.body.email} не найден`
         })
       }
 
-      this.mailService.send(req.query.email as string, result._id!.toString());
+      this.mailService.send(req.body.email as string, result._id!.toString());
 
       this.ok(res, {
         message: 'Результат найден',
